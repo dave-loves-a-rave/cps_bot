@@ -2,7 +2,7 @@
 Uses SNMP to pull the active CPS numbers (per protocol) for each zone on the firewall
 
 
-This script will poll OID .1.3.6.1.4.1.25461.2.1.2.3.10 and parse the output for each zone configured on the target firewall. This script only supports SNMP 2c.
+This script will poll OID .1.3.6.1.4.1.25461.2.1.2.3.10 and parse the output for each zone configured on the target firewall. This script only supports SNMP version 3.
 
 # Preparation
 
@@ -23,7 +23,7 @@ The system you run this script on will need to have Palo Alto Networks v8.0 MIBS
 To ensure that all of the MIBs are correctly loaded, run the following command:
 
 ```
-snmptable -v 2c -Pe -c <read_string> <fw_ip> .1.3.6.1.4.1.25461.2.1.2.3.10 2>/dev/null
+snmptable -Pe -v3 -u <username> -A <auth_pw> -l authPriv -a SHA -x AES -X <priv_pw> <fw_ip> PAN-COMMON-MIB::panZoneTable
 ```
 
 The result will look similar to this:
